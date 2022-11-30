@@ -29,15 +29,15 @@ The purpose of this email was not to annoy you, I just wanted to test my python 
 
 
 # get all qoutes
-with open('qoutes.json') as f:
+with open('quotes.json') as f:
     quotes = json.load(f)
 
 
 # get email list
-with open('dummy_list.json') as f:
+with open('email_list.json') as f:
     email_list = json.load(f)
 
-email_list = email_list[:1]
+
 
 with smtplib.SMTP_SSL('smtp.gmail.com', 465) as conn:
     conn.login(MY_EMAIL, MY_PASSWORD)
@@ -51,7 +51,7 @@ with smtplib.SMTP_SSL('smtp.gmail.com', 465) as conn:
         msg['From'] = MY_EMAIL
         msg['To'] = info['email']
         quote = choice(quotes)
-        content = f"Here's a motivation quote for to help you to get through tough times {emoji2}\n\n\n{quote}\n\n{FOOTER}"
+        content = f"Here's a motivation quote to help you get through tough times {emoji2}\n\n\n{quote}\n\n{FOOTER}"
         msg.set_content(content)
         conn.send_message(msg)
         print(f"Sent {quote} to {info['name']}")
